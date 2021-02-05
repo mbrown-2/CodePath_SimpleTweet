@@ -53,6 +53,14 @@ public class TwitterClient extends OAuthBaseClient {
 		client.get(apiUrl, params, handler);
 	}
 
+	public void publishTweet(String tweetContent, JsonHttpResponseHandler handler) { // Original: getInterestingnessList
+		String apiUrl = getApiUrl("statuses/update.json"); // original: nojsoncallback=1&method=flickr.interestingness.getList
+		// Can specify query string params directly or through RequestParams.
+		RequestParams params = new RequestParams();
+		params.put("status", tweetContent);
+		client.post(apiUrl, params, "", handler);
+	}
+
 	public void getNextPageOfTweets(JsonHttpResponseHandler handler, long maxId) { // Original: getInterestingnessList
 		String apiUrl = getApiUrl("statuses/home_timeline.json"); // original: nojsoncallback=1&method=flickr.interestingness.getList
 		// Can specify query string params directly or through RequestParams.
